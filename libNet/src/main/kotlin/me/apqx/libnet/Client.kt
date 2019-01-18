@@ -11,11 +11,9 @@ import java.util.concurrent.BlockingQueue
 /**
  * 客户端，通过Socket连接Server进行通信
  *
- * @param ipStr 目标ip
- * @param port 目标端口
  * @param bufferQueueSize 发送、接收暂存队列的容量，默认是20
  */
-class Client(private val ipStr: String, private val port: Int, private val bufferQueueSize: Int = 20) {
+class Client(private val bufferQueueSize: Int = 20, private val log: INetLog) {
 
     private lateinit var socketChannel: SocketChannel
     private val byteBuffer = ByteBuffer.allocate(1024)
@@ -26,8 +24,11 @@ class Client(private val ipStr: String, private val port: Int, private val buffe
 
     /**
      * 连接指定的ip和端口，阻塞方法，成功或抛出异常
+     *
+     * @param ipStr 目标ip
+     * @param port 目标端口
      */
-    fun connect() {
+    fun connect(ipStr: String, port: Int) {
         socketChannel = SocketChannel.open(InetSocketAddress(ipStr, port))
     }
 
@@ -36,7 +37,7 @@ class Client(private val ipStr: String, private val port: Int, private val buffe
      */
     fun send(byteArray: ByteArray) {
         if (sendQueue.size == bufferQueueSize - 5) {
-
+            log.e("")
         }
     }
 
