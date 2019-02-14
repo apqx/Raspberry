@@ -1,6 +1,5 @@
 package me.apqx.logutil
 
-import android.util.Log
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,19 +14,23 @@ private const val LOG_QUEUE_CAPACITY = 100
  */
 object LogUtil {
     private lateinit var dirFile: File
+    private lateinit var iLogPrint: ILogPrint
     private var fileWriter: FileWriter? = null
     private var logThread: Thread? = null
     private val logNameFormat = SimpleDateFormat("yyyyMMdd", Locale.CHINA)
     private val logTimeFormat = SimpleDateFormat.getTimeInstance()
     private val logQueue = LinkedBlockingQueue<String>(LOG_QUEUE_CAPACITY)
 
+
     /**
      * 在Application中执行初始化
      *
      * @param dirFile 日志文件保存路径，必须确保权限，否则抛出异常
+     * @param iLogPrint 向平台打印日志
      */
-    fun init(dirFile: File) {
+    fun init(dirFile: File, iLogPrint: ILogPrint) {
         this.dirFile = dirFile
+        this.iLogPrint = iLogPrint;
         d(TAG_SELF, "init, logDir = ${dirFile.absolutePath}")
         checkLogThread()
     }
@@ -74,48 +77,43 @@ object LogUtil {
         fileWriter?.close()
     }
 
+    /**
+     * 输出日志：打印到控制台，输出到日志文件
+     */
     fun d(tag: String, log: String, saveToFile: Boolean = true) {
-        Log.d(tag, log)
-        if (saveToFile) {
-            saveQueue(tag, log)
-        }
+        iLogPrint.d(tag, log)
+        saveLog2File(saveToFile, tag, log)
     }
 
+    /**
+     * 输出日志：打印到控制台，输出到日志文件
+     */
     fun d(log: String, saveToFile: Boolean = true) {
-        d(TAG, log)
+        d(TAG, log, saveToFile)
     }
 
+    /**
+     * 输出错误日志：打印到控制台，输出到日志文件
+     */
     fun e(tag: String, log: String, saveToFile: Boolean = true) {
-        Log.e(tag, log)
-        if (saveToFile) {
-            saveQueue(tag, log)
-        }
+        iLogPrint.e(tag, log)
+        saveLog2File(saveToFile, tag, log)
     }
 
+    /**
+     * 输出错误日志：打印到控制台，输出到日志文件
+     */
     fun e(log: String, saveToFile: Boolean = true) {
-        e(TAG, log)
+        e(TAG, log, saveToFile)
     }
 
-    fun i(tag: String, log: String, saveToFile: Boolean = true) {
-        Log.i(tag, log)
+    /**
+     * 将日志输出到文件
+     */
+    private fun saveLog2File(saveToFile: Boolean, tag: String, log: String) {
         if (saveToFile) {
             saveQueue(tag, log)
         }
-    }
-
-    fun i(log: String, saveToFile: Boolean = true) {
-        i(TAG, log)
-    }
-
-    fun v(tag: String, log: String, saveToFile: Boolean = true) {
-        Log.v(tag, log)
-        if (saveToFile) {
-            saveQueue(tag, log)
-        }
-    }
-
-    fun v(log: String, saveToFile: Boolean = true) {
-        v(TAG, log)
     }
 
     /**

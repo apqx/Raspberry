@@ -1,8 +1,8 @@
-package me.apqx.libnet.tools
+package me.apqx.socket.tools
 
 import java.lang.StringBuilder
 
-object SerialTools {
+object ByteTools {
 
     /**
      * 将字节数组转换为十六进制字符串显示

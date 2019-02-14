@@ -1,10 +1,8 @@
 package me.apqx.logutil
 
-import android.util.Log
 import java.io.File
 import java.io.FileOutputStream
 import java.nio.ByteBuffer
-import java.nio.channels.Channel
 import java.nio.channels.FileChannel
 
 /**

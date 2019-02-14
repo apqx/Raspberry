@@ -1,19 +1,16 @@
-package me.apqx.libnet
+package me.apqx.socket
 
-import java.net.Inet4Address
-import java.net.InetAddress
 import java.net.InetSocketAddress
 import java.nio.ByteBuffer
 import java.nio.channels.SocketChannel
 import java.util.concurrent.ArrayBlockingQueue
-import java.util.concurrent.BlockingQueue
 
 /**
  * 客户端，通过Socket连接Server进行通信
  *
  * @param bufferQueueSize 发送、接收暂存队列的容量，默认是20
  */
-class Client(private val bufferQueueSize: Int = 20, private val log: INetLog) {
+class Client(private val bufferQueueSize: Int = 20, private val log: ILog) {
 
     private lateinit var socketChannel: SocketChannel
     private val byteBuffer = ByteBuffer.allocate(1024)

@@ -5,8 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/Raspberry.iml" filepath="$PROJECT_DIR$/Raspberry.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/libBase/libBase.iml" filepath="$PROJECT_DIR$/libBase/libBase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libNet/libNet.iml" filepath="$PROJECT_DIR$/libNet/libNet.iml" />
       <module fileurl="file://$PROJECT_DIR$/logUtil/logUtil.iml" filepath="$PROJECT_DIR$/logUtil/logUtil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/socketUtil/socketUtil.iml" filepath="$PROJECT_DIR$/socketUtil/socketUtil.iml" />
     </modules>
   </component>
 </project>

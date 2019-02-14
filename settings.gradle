@@ -1,1 +1,1 @@
-include ':app', ':libNet', ':logUtil', ':libBase'
+include ':app', ':socketUtil', ':logUtil', ':libBase'

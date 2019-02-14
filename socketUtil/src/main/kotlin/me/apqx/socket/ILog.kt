@@ -1,6 +1,6 @@
-package me.apqx.libnet
+package me.apqx.socket
 
-interface INetLog {
+interface ILog {
     fun d(log: String)
 
     fun e(log: String)
