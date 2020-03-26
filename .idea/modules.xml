@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Raspberry.iml" filepath="$PROJECT_DIR$/Raspberry.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libBase/libBase.iml" filepath="$PROJECT_DIR$/libBase/libBase.iml" />
-      <module fileurl="file://$PROJECT_DIR$/logUtil/logUtil.iml" filepath="$PROJECT_DIR$/logUtil/logUtil.iml" />
-      <module fileurl="file://$PROJECT_DIR$/socketUtil/socketUtil.iml" filepath="$PROJECT_DIR$/socketUtil/socketUtil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Raspberry.iml" filepath="$PROJECT_DIR$/Raspberry.iml" group="Raspberry" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Raspberry/app" />
+      <module fileurl="file://$PROJECT_DIR$/libBase/libBase.iml" filepath="$PROJECT_DIR$/libBase/libBase.iml" group="Raspberry/libBase" />
+      <module fileurl="file://$PROJECT_DIR$/logUtil/logUtil.iml" filepath="$PROJECT_DIR$/logUtil/logUtil.iml" group="Raspberry/logUtil" />
+      <module fileurl="file://$PROJECT_DIR$/socketUtil/socketUtil.iml" filepath="$PROJECT_DIR$/socketUtil/socketUtil.iml" group="Raspberry/socketUtil" />
     </modules>
   </component>
 </project>

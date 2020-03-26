@@ -5,6 +5,7 @@ import java.net.Socket
 import java.nio.ByteBuffer
 import java.nio.channels.SocketChannel
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * 默认超时时间，秒
@@ -27,6 +28,7 @@ class SocketHandler(private val socket: Socket, private val iLog: ILog) {
     private val sendBuffer = ByteBuffer.allocate(BUFFER_SIZE)
     private val receiveBuffer = ByteBuffer.allocate(BUFFER_SIZE)
     private val receiveBytesQueue: Queue<ByteArray> = LinkedList()
+    private val tempByteList = ArrayList<Byte>(BUFFER_SIZE)
 
     /**
      * 发送字节数组，阻塞方法
@@ -48,8 +50,18 @@ class SocketHandler(private val socket: Socket, private val iLog: ILog) {
      * @param overTimeSec 超时时间，秒
      */
     fun sendAndReceive(bytes: ByteArray, overTimeSec: Int = OVERTIME_SEC): ByteArray {
+        receiveBytesQueue.clear()
         send(bytes)
-        TODO()
+        val currentTime = System.currentTimeMillis()
+        var array: ByteArray = byteArrayOf()
+        while (System.currentTimeMillis() - currentTime < overTimeSec * 1000) {
+            if (receiveBytesQueue.peek() != null) {
+                array = receiveBytesQueue.poll()
+                break
+            }
+            Thread.sleep(500)
+        }
+        return array
     }
 
     /**
@@ -70,11 +82,13 @@ class SocketHandler(private val socket: Socket, private val iLog: ILog) {
                     if (bytes.isNotEmpty()) {
                         saveBytes2Queue(bytes)
                     }
-
-
+                    // 每500ms检查一次Channel中是否有数据
+                    Thread.sleep(500)
                 }
+                iLog.d("socketThread stop $readThread")
             }
         }
+        iLog.d("socketThread start $readThread")
         readThread!!.start()
     }
 
@@ -83,12 +97,38 @@ class SocketHandler(private val socket: Socket, private val iLog: ILog) {
      */
     private fun saveBytes2Queue(bytes: ByteArray) {
         if (receiveBytesQueue.size == QUEUE_SIZE_RECEIVE) {
-            iLog.d("")
+            iLog.d("delete oldest data = ${ByteTools.byteToHexString(receiveBytesQueue.poll())}" +
+                    ", cause receiveByteQueue.size == $QUEUE_SIZE_RECEIVE")
         }
+        iLog.d("socket in queue = ${ByteTools.byteToHexString(bytes)}")
+        receiveBytesQueue.offer(bytes)
     }
 
-    private fun readChannel(socketChannel: SocketChannel, receiveBuffer: ByteBuffer?): ByteArray {
-        TODO()
+    /**
+     * 从Channel中读取一个连续的字节序列，不要太大，会占用太多内存
+     */
+    private fun readChannel(socketChannel: SocketChannel, receiveBuffer: ByteBuffer): ByteArray {
+        receiveBuffer.clear()
+        tempByteList.clear()
+        var tempCount = 0
+        while (!Thread.currentThread().isInterrupted) {
+            tempCount = socketChannel.read(receiveBuffer)
+            receiveBuffer.flip()
+            // TODO: array 返回的是有效数据，还是缓存容量总数据
+            val array = receiveBuffer.array()
+            iLog.d("socket receive = ${ByteTools.byteToHexString(array)}")
+            tempByteList.addAll(array.asList())
+            if (tempCount == 0 || tempCount == -1) {
+                // 读取到本次序列的所有数据
+                break
+            }
+            // 序列中还有数据
+        }
+        val array = ByteArray(tempByteList.size) {
+            tempByteList[it]
+        }
+        iLog.d("<= ${ByteTools.byteToHexString(array)}")
+        return array
     }
 
     /**
@@ -102,6 +142,7 @@ class SocketHandler(private val socket: Socket, private val iLog: ILog) {
      * 关闭Socket连接
      */
     fun closeSocket() {
+        socketChannel.finishConnect()
         socket.close()
     }
 }
