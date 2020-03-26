@@ -1,1 +1,3 @@
-include ':app', ':socketUtil', ':logUtil', ':libBase'
+include ':app', ':jetsocket', ':logutil', ':libbase'
+include ':raspberry'
+include ':jetlog'

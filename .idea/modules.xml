@@ -4,9 +4,11 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Raspberry.iml" filepath="$PROJECT_DIR$/Raspberry.iml" group="Raspberry" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="Raspberry/app" />
-      <module fileurl="file://$PROJECT_DIR$/libBase/libBase.iml" filepath="$PROJECT_DIR$/libBase/libBase.iml" group="Raspberry/libBase" />
-      <module fileurl="file://$PROJECT_DIR$/logUtil/logUtil.iml" filepath="$PROJECT_DIR$/logUtil/logUtil.iml" group="Raspberry/logUtil" />
-      <module fileurl="file://$PROJECT_DIR$/socketUtil/socketUtil.iml" filepath="$PROJECT_DIR$/socketUtil/socketUtil.iml" group="Raspberry/socketUtil" />
+      <module fileurl="file://$PROJECT_DIR$/jetlog/jetlog.iml" filepath="$PROJECT_DIR$/jetlog/jetlog.iml" group="Raspberry/jetlog" />
+      <module fileurl="file://$PROJECT_DIR$/jetsocket/jetsocket.iml" filepath="$PROJECT_DIR$/jetsocket/jetsocket.iml" group="Raspberry/jetsocket" />
+      <module fileurl="file://$PROJECT_DIR$/libbase/libbase.iml" filepath="$PROJECT_DIR$/libbase/libbase.iml" group="Raspberry/libbase" />
+      <module fileurl="file://$PROJECT_DIR$/logutil/logutil.iml" filepath="$PROJECT_DIR$/logutil/logutil.iml" group="Raspberry/logutil" />
+      <module fileurl="file://$PROJECT_DIR$/raspberry/raspberry.iml" filepath="$PROJECT_DIR$/raspberry/raspberry.iml" group="Raspberry/raspberry" />
     </modules>
   </component>
 </project>
