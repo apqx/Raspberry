@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/jetlog/jetlog.iml" filepath="$PROJECT_DIR$/jetlog/jetlog.iml" group="Raspberry/jetlog" />
       <module fileurl="file://$PROJECT_DIR$/jetsocket/jetsocket.iml" filepath="$PROJECT_DIR$/jetsocket/jetsocket.iml" group="Raspberry/jetsocket" />
       <module fileurl="file://$PROJECT_DIR$/libbase/libbase.iml" filepath="$PROJECT_DIR$/libbase/libbase.iml" group="Raspberry/libbase" />
-      <module fileurl="file://$PROJECT_DIR$/logutil/logutil.iml" filepath="$PROJECT_DIR$/logutil/logutil.iml" group="Raspberry/logutil" />
       <module fileurl="file://$PROJECT_DIR$/raspberry/raspberry.iml" filepath="$PROJECT_DIR$/raspberry/raspberry.iml" group="Raspberry/raspberry" />
     </modules>
   </component>
